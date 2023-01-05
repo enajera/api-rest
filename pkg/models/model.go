@@ -24,7 +24,7 @@ type Response struct {
 		// 	Value int `json:"value"`
 		// } `json:"total"`
 		// MaxScore float64 `json:"max_score"`
-		Hits []struct {
+		Hit []struct {
 			// Index  string  `json:"_index"`
 			// Type   string  `json:"_type"`
 			// ID     string  `json:"_id"`
@@ -33,9 +33,9 @@ type Response struct {
 				Body string `json:"Body"`
 				// ContentTransferEncoding string `json:"ContentTransferEncoding"`
 				// ContentType             string `json:"ContentType"`
-				Date string `json:"Date"`
-				From string `json:"From"`
-				// MessageID               string `json:"MessageID"`
+				Date      string `json:"Date"`
+				From      string `json:"From"`
+				MessageID string `json:"MessageID"`
 				// MimeVersion             string `json:"MimeVersion"`
 				Subject string `json:"Subject"`
 				To      string `json:"To"`
@@ -52,24 +52,26 @@ type Response struct {
 }
 
 type Result struct {
-	Body    string `json:"Body"`
-	To      string `json:"To"`
-	From    string `json:"From"`
-	Subject string `json:"Subject"`
-	Folder string `json:"Folder"`
+	Body      string `json:"Body"`
+	To        string `json:"To"`
+	From      string `json:"From"`
+	Subject   string `json:"Subject"`
+	Folder    string `json:"Folder"`
+	MessageID string `json:"MessageID"`
 }
 
 func EmailFields(res Response) []Result {
 
 	var results []Result
 
-	for _, hit := range res.Hits.Hits {
+	for _, hit := range res.Hits.Hit {
 		result := Result{
-			Body:    hit.Source.Body,
-			To:      hit.Source.To,
-			From:    hit.Source.From,
-			Subject: hit.Source.Subject,
-			Folder: hit.Source.XFolder,
+			Body:      hit.Source.Body,
+			To:        hit.Source.To,
+			From:      hit.Source.From,
+			Subject:   hit.Source.Subject,
+			Folder:    hit.Source.XFolder,
+			MessageID: hit.Source.MessageID,
 		}
 		results = append(results, result)
 	}

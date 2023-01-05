@@ -5,14 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-
 	m "github.com/enajera/api-rest/pkg/models"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/v5/middleware"
 )
 
 func Routes() *chi.Mux {
-	mux := chi.NewMux()
+	mux := chi.NewRouter()
 
 	//globals middlewares
 	mux.Use(
@@ -30,6 +29,7 @@ func Routes() *chi.Mux {
 // InitHandler metodo de inicio
 func InitHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	res := map[string]interface{}{"message": "No results"}
 	_ = json.NewEncoder(w).Encode(res)
 }
@@ -37,6 +37,7 @@ func InitHandler(w http.ResponseWriter, r *http.Request) {
 // SearchParamHandler busqueda de un parametro
 func SearchParamHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	param := chi.URLParam(r, "param")
 	res := map[string]interface{}{"message": param}
 	_ = json.NewEncoder(w).Encode(res)
@@ -45,10 +46,12 @@ func SearchParamHandler(w http.ResponseWriter, r *http.Request) {
 // SearchHandler obtiene los resultados de la busqueda
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	//Decodifica el body y lo mapea al objeto request
 	req := ParseRequest(r)
 
+	//Obtengo la respuesta 
 	res, err := Buscar(*req)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -100,7 +103,7 @@ func Buscar(request m.Request) (m.Response, error) {
 	}
 	defer resp.Body.Close()
 
-	// Procesa la respuesta para obtener la estructura Response
+	// Procesa la respuesta Json y la convierte en estructura Response
 	var res m.Response
 	err = json.NewDecoder(resp.Body).Decode(&res)
 	if err != nil {
