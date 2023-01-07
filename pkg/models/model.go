@@ -20,9 +20,9 @@ type Response struct {
 	// 	Failed     int `json:"failed"`
 	// } `json:"_shards"`
 	Hits struct {
-		// Total struct {
-		// 	Value int `json:"value"`
-		// } `json:"total"`
+		Total struct {
+			Value int `json:"value"`
+		} `json:"total"`
 		// MaxScore float64 `json:"max_score"`
 		Hit []struct {
 			// Index  string  `json:"_index"`
@@ -58,6 +58,13 @@ type Result struct {
 	Subject   string `json:"Subject"`
 	Folder    string `json:"Folder"`
 	MessageID string `json:"MessageID"`
+	Date      string `json:"Date"`
+	
+}
+
+type Results struct {
+    Total int        `json:"total"`
+    Data  []Result `json:"data"`
 }
 
 func EmailFields(res Response) []Result {
@@ -72,9 +79,16 @@ func EmailFields(res Response) []Result {
 			Subject:   hit.Source.Subject,
 			Folder:    hit.Source.XFolder,
 			MessageID: hit.Source.MessageID,
+			Date: hit.Source.Date,
 		}
 		results = append(results, result)
 	}
 
 	return results
+}
+
+type Index struct {
+    List []struct {
+        Name string `json:"name"`
+    }`json:"list"`
 }
