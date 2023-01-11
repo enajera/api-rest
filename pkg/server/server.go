@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 	"github.com/go-chi/chi"
+	"github.com/spf13/viper"
 )
 
 type Server struct {
@@ -12,8 +13,9 @@ type Server struct {
 }
 
 func NewServer(mux *chi.Mux) *Server {
+	port := viper.GetString("port")
 	s := &http.Server{
-		Addr:           ":9000",
+		Addr:           ":"+ port,
 		Handler:        mux,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,

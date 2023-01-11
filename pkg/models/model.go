@@ -1,5 +1,16 @@
 package models
 
+type SearchRequest struct {
+	Index string `json:"index"`
+	SearchType string `json:"search_type"`
+	Query      struct {
+		Term string `json:"term"`
+	} `json:"query"`
+	From         int      `json:"from"`
+	MaxResults   int      `json:"max_results"`
+	
+}
+
 type Request struct {
 	SearchType string `json:"search_type"`
 	Query      struct {
@@ -7,7 +18,6 @@ type Request struct {
 	} `json:"query"`
 	From         int      `json:"from"`
 	MaxResults   int      `json:"max_results"`
-	SourceFields []string `json:"_source"`
 }
 
 type Response struct {
@@ -91,4 +101,13 @@ type Index struct {
     List []struct {
         Name string `json:"name"`
     }`json:"list"`
+}
+
+type Login struct {
+	User string `json:"user"`
+	Pass string `json:"pass"`
+}
+
+type LoginResponse struct {
+	Success bool `json:"success"`
 }
