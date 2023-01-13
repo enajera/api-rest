@@ -20,6 +20,9 @@ test:
 
 deploy:
   stage: deploy
+  image:
+    name: amazon/aws-cli
+    entrypoint: [""]
   script:
     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
