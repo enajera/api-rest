@@ -27,7 +27,7 @@ deploy:
     - aws s3 cp api-rest s3://$S3_BUCKET/api-rest
     - aws elasticbeanstalk update-environment --environment-name production --version-label $S3_BUCKET/api-rest
   only:
-    - master
+    - main
   dependencies:
   - build
 
