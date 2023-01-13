@@ -1,3 +1,8 @@
+variables:
+  ARTIFACT_NAME: api-rest-$CI_PIPELINE_IID
+  APP_NAME: api-rest
+
+
 image: golang:latest
 
 stages:
@@ -28,7 +33,8 @@ deploy:
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
     - aws configure set default.region us-east-1
     - aws s3 cp api-rest s3://$S3_BUCKET/api-rest
-    - aws elasticbeanstalk update-environment --environment-name production --version-label $S3_BUCKET/api-rest
+    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $CI_PIPELINE_IID --source-bundle S3Bucket=$S3_BUCKET,S3Key=$ARTIFACT_NAME
+    - aws elasticbeanstalk update-environment --application-name $APP_NAME --environment-name production --version-label $CI_PIPELINE_IID
   only:
     - main
   dependencies:
