@@ -13,7 +13,7 @@ stages:
 build:
   stage: build
   script:
-    - apk add zip
+    - apt-get update && apt-get install -y zip
     - go build -o api-rest cmd/main/main.go
     - zip -r api-rest.zip api-rest
   artifacts:
