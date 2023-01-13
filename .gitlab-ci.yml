@@ -29,8 +29,5 @@ deploy:
   only:
     - master
   dependencies:
-<<<<<<< HEAD
   - build
-=======
-  - build
->>>>>>> e9b5ef228c3bd5ce9d13effe0482ce9184773342
+
