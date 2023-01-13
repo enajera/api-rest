@@ -1,6 +1,6 @@
 {
     "api":"http://playground.dev.zincsearch.com/api/",
-    "port":"9000",
+    "port":"5000",
     "user":"admin",
     "pass":"Complexpass#123",
     "basic_auth_user" : "admin",
