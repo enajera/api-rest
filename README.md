@@ -25,17 +25,18 @@ Maneja una solicitud para obtener una lista de índices, haciendo una solicitud 
 ### Función "SearchHandler"
 Maneja una solicitud para buscar correos, que recibe en el cuerpo de la solicitud un objeto JSON con los parámetros de búsqueda. La función hace una solicitud HTTP POST al servidor Zincsearch con los parámetros de búsqueda y las credenciales almacenadas en un archivo de configuración. Se devuelve la respuesta recibida del servidor Zincsearch en formato JSON.
 
-(*Request:*)
+Request:
+
 {
-   "index": "enronmail",
-   "search_type": "match",
-    "query":
-      {
-            "term": "elvin"
+ "index": "enronmail",
+ "search_type": "match",
+ "query":
+  {
+   "term": "elvin"
            
-      },
-    "from": 0,
-    "max_results": 20
+  },
+ "from": 0,
+ "max_results": 20
              
  }
 
