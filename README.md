@@ -8,10 +8,10 @@ La función principal es "Routes()", que devuelve una nueva instancia de "chi.Mu
 
 Se definen varias rutas, cada una con su propia función handler:
 
-(*"/": "Welcome"*)
-(*"POST /login": "Login"*)
-(*"GET /index" (con autenticación básica): "GetIndex"*)
-(*"POST /search" (con autenticación básica): "SearchHandler"*)
+*"/": "Welcome"*
+*"POST /login": "Login"*
+*"GET /index" (con autenticación básica): "GetIndex"*
+*"POST /search" (con autenticación básica): "SearchHandler"*
 
 ### Función "Welcome" 
 Mensaje de bienvenida
