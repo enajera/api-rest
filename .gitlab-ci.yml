@@ -13,6 +13,8 @@ stages:
 build:
   stage: build
   before_script:
+    -apk update
+    -apk add
     -apt-get install zip
   script:
     - go build -o api-rest cmd/main/main.go
