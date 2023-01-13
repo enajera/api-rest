@@ -14,7 +14,7 @@ build:
   stage: build
   image: openjdk:12-alpine
   before_script:
-    - apt-get install zip
+    - apk-get install zip
   script:
     - go build -o api-rest cmd/main/main.go
     - zip -r api-rest.zip api-rest
