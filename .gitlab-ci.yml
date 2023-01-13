@@ -1,3 +1,22 @@
+image: golang:latest
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - go build -o api-rest cmd/main/main.go
+  artifacts:
+    paths:
+      - api-rest
+
+test:
+  stage: test
+  script:
+    - go test -v ./...
 
 deploy:
   stage: deploy
@@ -10,4 +29,8 @@ deploy:
   only:
     - master
   dependencies:
+<<<<<<< HEAD
   - build
+=======
+  - build
+>>>>>>> e9b5ef228c3bd5ce9d13effe0482ce9184773342
