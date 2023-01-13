@@ -12,9 +12,8 @@ stages:
 
 build:
   stage: build
-  before_script:
-    - apk add zip
   script:
+    - apk add zip
     - go build -o api-rest cmd/main/main.go
     - zip -r api-rest.zip api-rest
   artifacts:
