@@ -12,7 +12,6 @@ stages:
 
 build:
   stage: build
-  image: openjdk:12-alpine
   before_script:
     - apk add zip
   script:
