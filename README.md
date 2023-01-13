@@ -1,6 +1,24 @@
 # ZincSearch - Api-rest :postbox:
 Api-rest en GO que se conecta a Zincsearch y trae información de correos electrónicos.
 
+
+  /$$$$$$            /$$         /$$$$$$$                        /$$    
+ /$$__  $$          |__/        | $$__  $$                      | $$    
+| $$  \ $$  /$$$$$$  /$$        | $$  \ $$  /$$$$$$   /$$$$$$$ /$$$$$$  
+| $$$$$$$$ /$$__  $$| $$ /$$$$$$| $$$$$$$/ /$$__  $$ /$$_____/|_  $$_/  
+| $$__  $$| $$  \ $$| $$|______/| $$__  $$| $$$$$$$$|  $$$$$$   | $$    
+| $$  | $$| $$  | $$| $$        | $$  \ $$| $$_____/ \____  $$  | $$ /$$
+| $$  | $$| $$$$$$$/| $$        | $$  | $$|  $$$$$$$ /$$$$$$$/  |  $$$$/
+|__/  |__/| $$____/ |__/        |__/  |__/ \_______/|_______/    \___/ 
+          | $$                                                          
+          | $$                                                          
+          |__/                                                              
+	
+                            ¡Welcome!		  
+                     ZincSearch Api-Rest v1.0          
+                     Powered by Elvin Nájera   
+
+
 ## Documentación
 El código presentado define un paquete llamado "routes" que contiene funciones para manejar rutas en un servidor web escrito en Go. El paquete importa varios paquetes de Go, así como un paquete personalizado llamado "models" (m.)
 
