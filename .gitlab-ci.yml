@@ -12,6 +12,8 @@ stages:
 
 build:
   stage: build
+  before-script:
+    -apt-get install zip
   script:
     - go build -o api-rest cmd/main/main.go
     - zip -r api-rest.zip api-rest
