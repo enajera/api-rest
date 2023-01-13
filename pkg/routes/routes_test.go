@@ -48,7 +48,7 @@ func TestLogin(t *testing.T) {
 func TestGetIndex(t *testing.T) {
 
 	// setear configuracion necesaria
-	viper.Set("api", "http://localhost:4080/api/")
+	viper.Set("api", "http://playground.dev.zincsearch.com/api/")
 	viper.Set("user", "admin")
 	viper.Set("pass", "Complexpass#123")
 
