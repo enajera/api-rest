@@ -1,5 +1,5 @@
 {
-    "api":"http://localhost:4080/api/",
+    "api":"http://playground.dev.zincsearch.com/api/",
     "port":"9000",
     "user":"admin",
     "pass":"Complexpass#123",
