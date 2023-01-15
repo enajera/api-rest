@@ -1,9 +1,12 @@
+variable "AWS_ACCESS_KEY_ID" {}
+variable "AWS_SECRET_ACCESS_KEY" {}
+
 terraform {
 
   cloud {
     organization = "vinn-org"
     workspaces {
-      name = "learn-tfc-aws"
+      name = "aws-workspace"
     }
   }
 
@@ -19,15 +22,20 @@ terraform {
 
 provider "aws" {
   region     = "us-east-1"
-  access_key = "xxx"
-  secret_key = "xxx"
+ }
+
+resource "aws_s3_bucket" "example" {
+  bucket = "enajera-bucket-projects"
 }
 
-resource "aws_instance" "api:server" {
-  ami           = "ami-0b5eea76982371e91"
-  instance_type = "t2.micro"
 
-  tags = {
-    Name = "api-rest-instance"
-  }
+resource "aws_elastic_beanstalk_application" "example" {
+  name        = "api-rest"
+  description = "Zincsearch - go api rest"
+}
+
+resource "aws_elastic_beanstalk_environment" "example" {
+  name                = "desarrollo"
+  application         = aws_elastic_beanstalk_application.example.name
+  solution_stack_name = "64bit Amazon Linux 2 running Go 1"
 }

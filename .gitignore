@@ -5,8 +5,9 @@
 *.dll
 *.so
 *.dylib
-*./terraform
+/terraform
 *.tf
+/bin
 
 # Test binary, built with `go test -c`
 *.test
