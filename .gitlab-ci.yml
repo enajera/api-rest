@@ -4,7 +4,6 @@ variables:
 
 image: golang:latest
 
-
 stages:
   - build
   - test
@@ -18,8 +17,7 @@ build:
     - zip -r $ARTIFACT_NAME $APP_NAME
   artifacts:
     paths:
-      # - $ARTIFACT_NAME
-     - $ARTIFACT_NAME
+      - $ARTIFACT_NAME
 test:
   stage: test
   script:
@@ -31,11 +29,9 @@ deploy:
     name: amazon/aws-cli
     entrypoint: [""]
   script:
-     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
     - aws configure set default.region us-east-1
     - aws s3 cp $ARTIFACT_NAME s3://$S3_BUCKET/$ARTIFACT_NAME
     - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $CI_PIPELINE_IID --source-bundle S3Bucket=$S3_BUCKET,S3Key=$ARTIFACT_NAME
     - aws elasticbeanstalk update-environment --application-name $APP_NAME --environment-name api-rest-dev --version-label $CI_PIPELINE_IID
-
-
