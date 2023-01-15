@@ -1,5 +1,5 @@
 variables:
-  APP_NAME: application
+  APP_NAME: api-rest
   ARTIFACT_NAME: api-rest.zip
 
 image: golang:latest
