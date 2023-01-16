@@ -14,7 +14,7 @@ build:
   script:
     - apt-get update && apt-get install -y zip
     - GOOS=linux GOARCH=amd64 go build -o bin/application
-    - zip -r $ARTIFACT_NAME -i $APP_NAME
+    - zip -r $ARTIFACT_NAME -i $CI_PROJECT_DIR
   artifacts:
     paths:
       - $ARTIFACT_NAME
