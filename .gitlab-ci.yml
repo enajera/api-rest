@@ -11,10 +11,11 @@ stages:
 
 build:
   stage: build
+  before_script:
+  - apt-get update && apt-get install -y python3-pip
+  - pip3 install --upgrade --user awsebcli
   script:
     - GOOS=linux GOARCH=amd64 go build -o bin/application
-    - apt-get update && apt-get install -y python3-pip
-    - pip install --upgrade --user awsebcli
     - eb init -p "go-1.9" $APP_NAME --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY
     - eb create $ENVIRONMENT_NAME --single
   artifacts:
