@@ -13,7 +13,7 @@ build:
   stage: build
   script:
     - GOOS=linux GOARCH=amd64 go build -o bin/application
-    - apt-get update && apt-get install -y python-pip
+    - apt-get update && apt-get install -y python3-pip
     - pip install --upgrade --user awsebcli
     - eb init -p "go-1.9" $APP_NAME --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY
     - eb create $ENVIRONMENT_NAME --single
@@ -28,7 +28,7 @@ test:
 deploy:
   stage: deploy
   script:
-    - apt-get update && apt-get install -y python-pip
+    - apt-get update && apt-get install -y python3-pip
     - pip install --upgrade --user awsebcli
     - eb init -p "python-3.7" $APP_NAME --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY
     - eb use $ENVIRONMENT_NAME
