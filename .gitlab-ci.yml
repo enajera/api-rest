@@ -1,6 +1,6 @@
 variables:
   APP_NAME: api-rest
-  ARTIFACT_NAME: api-rest.zip
+  ENVIRONMENT_NAME: api-rest-dev
 
 image: golang:latest
 
@@ -12,12 +12,14 @@ stages:
 build:
   stage: build
   script:
-    - apt-get update && apt-get install -y zip
     - GOOS=linux GOARCH=amd64 go build -o bin/application
-    - zip -r $ARTIFACT_NAME $CI_PROJECT_DIR
+    - apt-get update && apt-get install -y python-pip
+    - pip install --upgrade --user awsebcli
+    - eb init -p "go-1.9" $APP_NAME --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY
+    - eb create $ENVIRONMENT_NAME --single
   artifacts:
     paths:
-      - $ARTIFACT_NAME
+      - build/
 test:
   stage: test
   script:
@@ -25,13 +27,9 @@ test:
 
 deploy:
   stage: deploy
-  image:
-    name: amazon/aws-cli
-    entrypoint: [""]
   script:
-    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    - aws configure set default.region us-east-1
-    - aws s3 cp $ARTIFACT_NAME s3://$S3_BUCKET/$ARTIFACT_NAME
-    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $CI_PIPELINE_IID --source-bundle S3Bucket=$S3_BUCKET,S3Key=$ARTIFACT_NAME
-    - aws elasticbeanstalk update-environment --application-name $APP_NAME --environment-name api-rest-dev --version-label $CI_PIPELINE_IID
+    - apt-get update && apt-get install -y python-pip
+    - pip install --upgrade --user awsebcli
+    - eb init -p "python-3.7" $APP_NAME --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY
+    - eb use $ENVIRONMENT_NAME
+    - eb deploy
