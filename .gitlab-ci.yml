@@ -12,9 +12,7 @@ stages:
 build:
   stage: build
   script:
-    - apt-get update && apt-get install -y zip
     - GOOS=linux GOARCH=amd64 go build -o bin/application
-    - zip -r $ARTIFACT_NAME $CI_PROJECT_DIR
   artifacts:
     paths:
       - $ARTIFACT_NAME
@@ -32,6 +30,5 @@ deploy:
     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
     - aws configure set default.region us-east-1
-    - aws s3 cp $ARTIFACT_NAME s3://$S3_BUCKET/$ARTIFACT_NAME
-    - aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label $APP_NAME $(date +%s) --source-bundle S3Bucket=$S3_BUCKET,S3Key=$ARTIFACT_NAME
-    - aws elasticbeanstalk update-environment --application-name $APP_NAME --environment-name api-rest-dev --version-label $APP_NAME $(date +%s)
+    - eb create api-rest-dev
+    - eb deploy api-rest-dev

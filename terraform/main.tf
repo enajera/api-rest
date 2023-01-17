@@ -35,7 +35,7 @@ resource "aws_elastic_beanstalk_application" "example" {
 }
 
 resource "aws_elastic_beanstalk_environment" "example" {
-  name                = "desarrollo"
+  name                = "api-rest-dev"
   application         = aws_elastic_beanstalk_application.example.name
   solution_stack_name = "64bit Amazon Linux 2 running Go 1"
 }
