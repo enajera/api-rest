@@ -23,12 +23,9 @@ test:
 
 deploy:
   stage: deploy
-  image:
-    name: amazon/aws-cli
-    entrypoint: [""]
+  image: 'mjsarfatti/gitlab-ci-pipeline-php-aws:latest'
   script:
     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    - aws configure set default.region us-east-1
-    - eb create api-rest-dev
+    - aws configure set default.region $AWS_DEFAULT_REGION
     - eb deploy api-rest-dev
