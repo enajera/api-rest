@@ -273,7 +273,7 @@ func Welcome(w http.ResponseWriter, r *http.Request) {
 	
                             ¡Welcome!		  
                      ZincSearch Api-Rest v1.0          
-                     Powered by Elvin Nájera            
+                     Powered by Elvin Nájera S            
 	`
 	fmt.Fprint(w, banner)
 }

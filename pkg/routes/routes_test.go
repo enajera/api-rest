@@ -17,28 +17,27 @@ func TestLogin(t *testing.T) {
    	viper.Set("basic_auth_user", "admin")
 	viper.Set("basic_auth_pass", "root")
 
-    //Crea una nueva petición de prueba
-    req, err := http.NewRequest("POST", "/login", bytes.NewBuffer([]byte(`{"user":"admin", "pass":"root"}`)))
+    //Se crea un objeto tipo r *http.Request
+    r, err := http.NewRequest("POST", "/login", bytes.NewBuffer([]byte(`{"user":"admin", "pass":"root"}`)))
     if err != nil {
         t.Fatal(err)
     }
 
-    // Crea un ResponseRecorder para analizar el resultado de la llamada al servidor
-    rr := httptest.NewRecorder()
-    handler := http.HandlerFunc(Login)
-
-    // Llamar al servidor con la petición de prueba
-    handler.ServeHTTP(rr, req)
+    // // Se crea un objeto tipo w http.ResponseWriter
+    w := httptest.NewRecorder()
+   
+	// se crea la instancia del handler Login
+    Login(w, r)
 
     // Comprueba el estado de la respuesta
-    if status := rr.Code; status != http.StatusOK {
+    if status := w.Code; status != http.StatusOK {
         t.Errorf("bad status code: got %v want %v",
             status, http.StatusOK)
     }
 
     // Comprueba el contenido de la respuesta
     var resp m.LoginResponse
-    json.Unmarshal(rr.Body.Bytes(), &resp)
+    json.Unmarshal(w.Body.Bytes(), &resp)
     if !resp.Success {
         t.Errorf("respuesta inesperada: se obtuvo %v -> se esperaba %v",
             resp.Success, true)
@@ -57,7 +56,7 @@ func TestGetIndex(t *testing.T) {
 	// Se crea un objeto tipo w http.ResponseWriter
 	w := httptest.NewRecorder()
 
-	// se crea la instancia de GetIndex
+	// se crea la instancia del handler GetIndex
 	GetIndex(w, r)
 
 	// Chequea el status code

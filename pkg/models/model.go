@@ -52,7 +52,7 @@ type Response struct {
 				// XBcc                    string `json:"XBcc"`
 				// XCc                     string `json:"XCc"`
 				// XFileName               string `json:"XFileName"`
-				XFolder string `json:"XFolder"`
+				// XFolder string `json:"XFolder"`
 				// XFrom                   string `json:"XFrom"`
 				// XOrigin                 string `json:"XOrigin"`
 				// XTo                     string `json:"XTo"`
@@ -66,7 +66,7 @@ type Result struct {
 	To        string `json:"To"`
 	From      string `json:"From"`
 	Subject   string `json:"Subject"`
-	Folder    string `json:"Folder"`
+	// Folder    string `json:"Folder"`
 	MessageID string `json:"MessageID"`
 	Date      string `json:"Date"`
 	
@@ -87,7 +87,7 @@ func EmailFields(res Response) []Result {
 			To:        hit.Source.To,
 			From:      hit.Source.From,
 			Subject:   hit.Source.Subject,
-			Folder:    hit.Source.XFolder,
+			// Folder:    hit.Source.XFolder,
 			MessageID: hit.Source.MessageID,
 			Date: hit.Source.Date,
 		}
